@@ -12,12 +12,13 @@
 }
 
 .square {
+  display: flex;
   flex: 1;
   margin-right: -1px;
   margin-bottom: -1px;
   border: 1px solid black;
 }
 
-.hovered {
-  background-color: blue;
+.black-square {
+  flex: 1;
 }

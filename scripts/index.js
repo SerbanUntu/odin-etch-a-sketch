@@ -1,6 +1,10 @@
 const grid = document.querySelector(".grid");
 const resizeButton = document.getElementById("resize-button");
 
+function getRandomNumber(upper) {
+  return Math.floor(Math.random() * (upper + 1));
+}
+
 function createGrid(size) {
   while(grid.hasChildNodes()) {
     grid.removeChild(grid.firstChild);
@@ -11,12 +15,19 @@ function createGrid(size) {
     row.classList.add("row");
     for(let j = 1; j <= size; j++) {
       const square = document.createElement("div");
+      const blackSquare = document.createElement("div");
       square.setAttribute("id", `square-${(i - 1) * size + j}`)
       square.classList.add("square");
-
+      blackSquare.classList.add("black-square");
+      blackSquare.style.backgroundColor = "black";
+      blackSquare.style.opacity = 0;
+      square.appendChild(blackSquare);
       square.addEventListener("mouseenter", (e) => {
         e.preventDefault();
-        square.classList.add("hovered");
+        if(+blackSquare.style.opacity < 1) {
+          square.style.backgroundColor = `rgb(${getRandomNumber(255)}, ${getRandomNumber(255)}, ${getRandomNumber(255)})`;
+          blackSquare.style.opacity = `${+blackSquare.style.opacity + 0.1}`;
+        }
       })
 
       row.appendChild(square);
